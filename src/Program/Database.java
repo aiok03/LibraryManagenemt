@@ -80,7 +80,7 @@ public class Database { //Repository
         }
     }
 
-    public Book getBook(int id) {
+    public Book getBook(int id) {   //method to get info about book
         Book book = null;
         String sql = "SELECT * FROM books WHERE id=" + id;
         try {
@@ -124,9 +124,9 @@ public class Database { //Repository
 
     public ArrayList<Student> getStudents() {
         ArrayList<Student> students = new ArrayList<>();
-        String sql = "SELECT * FROM students";
+        String sql = "SELECT * FROM students";   //we select all students
         try {
-            Statement statement = connection.createStatement();
+            Statement statement = connection.createStatement();  //Statement used for "select"
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 Student student = getStudent(resultSet.getString("name"), resultSet.getString("password"));
@@ -142,8 +142,8 @@ public class Database { //Repository
         return students;
     }
 
-    public ArrayList<Book> getBooks() {
-        ArrayList<Book> books = new ArrayList<>();
+    public ArrayList<Book> getBooks() {      //method to get all books
+        ArrayList<Book> books = new ArrayList<>();  //using array list of books
         String sql = "SELECT * FROM books";
         try {
             Statement statement = connection.createStatement();
@@ -168,7 +168,7 @@ public class Database { //Repository
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                return resultSet.getInt("id");
+                return resultSet.getInt("id");   //get student id from database
             }
             resultSet.close();
             statement.close();
@@ -187,7 +187,7 @@ public class Database { //Repository
             while (resultSet.next()) {
                 Book book = getBook(resultSet.getInt("id"));
                 if (book != null) {
-                    books.add(book);
+                    books.add(book);   //"books" contains books with inputted author
                 }
             }
             resultSet.close();
@@ -207,7 +207,7 @@ public class Database { //Repository
             while (resultSet.next()) {
                 Book book = getBook(resultSet.getInt("id"));
                 if (book != null) {
-                    books.add(book);
+                    books.add(book);    //"books" contains books with inputted genre
                 }
             }
             resultSet.close();
@@ -218,7 +218,7 @@ public class Database { //Repository
         return books;
     }
 
-    public int login(String name, String password) {
+    public int login(String name, String password) {     //method to check if student is ib base
         String sql = "SELECT * FROM students WHERE name='" + name + "' and password='" + password + "'"; //sql statement
         try {
             Statement statement = connection.createStatement();
